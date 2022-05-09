@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.example.demo.mapper.UserXMLMapper">
+	<insert id="insertUser" parameterType="com.example.demo.vo.UserVO">
+		insert into user values(NULL,#{uid},#{pwd},#{phone},#{address},#{name},#{email})
+	</insert>
+	
+	<insert id="kakaoUser" parameterType="com.example.demo.vo.KakaoVO">
+		insert into kakaouser values(NULL,#{uid},#{email},#{kakaoid},NULL)
+	</insert>
+	
+	<insert id="naverUser" parameterType="com.example.demo.vo.NaverVO">
+		insert into naveruser values(NULL,#{uid},#{email},#{naverid},NULL)
+	</insert>
+	
+	<select id="getUser" resultType="com.example.demo.vo.UserVO" parameterType="com.example.demo.vo.UserVO">
+		select * from user where uid=#{uid} and pwd=#{pwd}
+	</select>
+	
+	<select id="checkById" resultType="com.example.demo.vo.UserVO" parameterType="String">
+		select * from user where uid=#{uid}
+	</select>
+	
+	<select id="checkByKakaoId" resultType="com.example.demo.vo.KakaoVO" parameterType="com.example.demo.vo.KakaoVO">
+		select * from kakaouser where uid=#{uid}
+	</select>
+	
+	<select id="checkByNaverId" resultType="com.example.demo.vo.NaverVO" parameterType="com.example.demo.vo.NaverVO">
+		select * from naveruser where uid=#{uid}
+	</select>
+	
+	<update id="updateUser"  parameterType="com.example.demo.vo.UserVO">
+		update user SET pwd=#{pwd} where uid=#{uid}
+	</update>
+	
+	<select id="selectLogin"
+      parameterType="com.example.demo.vo.UserVO"
+      resultType="com.example.demo.vo.UserVO">
+      SELECT * FROM user WHERE uid=#{uid}
+   </select>
+   
+   	<update id="lostPw" parameterType="com.example.demo.vo.UserVO">
+		update user SET pwd=#{pwd} where uid=#{uid} and email=#{email}
+	</update>
+</mapper>

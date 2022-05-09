@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.example.demo.mapper.ReplyXMLMapper">
+
+	<!-- 댓글 삭제시 bbs > reply컬럼 -1 처리 -->
+	<update id="updateCountReply"
+		parameterType="com.example.demo.vo.ReplyVO">
+		UPDATE bbs 
+		SET reply = reply - 1
+		WHERE num = #{bno}
+	</update>
+
+	<!-- 모댓글삭제, 대댓글 있음 -->
+	<update id="comentDelete"
+		parameterType="com.example.demo.vo.ReplyVO">
+		UPDATE bbs_comment SET cmt=""
+		WHERE rno=#{rno}
+	</update>
+	
+	<!-- 모댓글이 삭제되었고 대댓글이 하나 남았다면 완전히 삭제 -->
+	<delete id="deleteReplyAll"
+		parameterType="com.example.demo.vo.ReplyVO">
+		DELETE FROM bbs_comment
+		WHERE cmt="" and rno=#{grp}
+	</delete>
+
+	<!-- 모댓글 삭제, 대댓글 없음 -->
+	<delete id="deleteReply"
+		parameterType="com.example.demo.vo.ReplyVO">
+		DELETE FROM bbs_comment
+		WHERE rno=#{rno}
+	</delete>
+
+	<!-- 모댓글의 대댓글 카운트 -->
+	<select id="countReply"
+		parameterType="Integer"
+		resultType="Integer">
+		SELECT count(rno) FROM bbs_comment 
+		WHERE grp=#{rno}
+	</select>
+	
+	<!-- 같은grp의  순서 정할 때 사용-->
+	<select id="selectMaxgrps"
+		parameterType="Integer"
+		resultType="Integer">
+		SELECT MAX(grps) FROM bbs_comment 
+		WHERE rno=#{grp} or grp=#{grp}
+	</select>
+	
+	<!-- bbs 댓글수 증가 -->
+	<update id="updateReply"
+		parameterType="Integer">
+		UPDATE bbs 
+		SET reply = reply + 1 
+		WHERE num = #{bno}
+	</update>
+
+	<!-- 댓글 작성 -->
+	<insert id="insertAdd"
+		parameterType="com.example.demo.vo.ReplyVO">
+		INSERT INTO bbs_comment VALUES(#{rno},#{bno},#{grp},#{grps},#{uid},#{cmt},#{repDate})
+	</insert>
+	
+</mapper>

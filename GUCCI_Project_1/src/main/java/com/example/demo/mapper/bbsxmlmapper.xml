@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.example.demo.mapper.BBSXMLMapper">
+
+	<update id="delete"	parameterType="Integer">
+		UPDATE bbs 
+		SET deleteYn="Y"
+		WHERE num=#{num}
+	</update>
+	
+	<update id="edit"
+		parameterType="com.example.demo.vo.BBSVO">
+		UPDATE bbs 
+		SET title=#{title}, content=#{content}
+		WHERE num=#{num}
+	</update>
+	
+	
+	<!-- 댓글 불러오는 곳 -->
+	<!-- grp가 varchar라서 grp*1을 해주므로 숫자로 인식되어 정렬시 오류가 나지 않게 함 -->
+	<select id="selectReply"
+		parameterType="Integer"
+		resultType="com.example.demo.vo.ReplyVO">
+		SELECT * FROM bbs_comment WHERE bno=#{num}
+		ORDER BY IF(ISNULL(grp), rno, grp*1), grps;
+	</select>
+
+	<update id="updateCnt"
+		parameterType="Integer">
+		UPDATE bbs 
+		SET cnt = cnt + 1 
+		WHERE num = #{num}
+	</update>
+
+	<select id="detail"
+		parameterType="Integer"
+		resultType="com.example.demo.vo.BBSVO">
+		SELECT * FROM bbs WHERE num=#{num}
+	</select>
+
+	<insert id="insertAdd"
+		parameterType="com.example.demo.vo.BBSVO"
+		useGeneratedKeys="true" keyProperty="num">
+		INSERT INTO bbs VALUES(NULL,#{uid},#{email},#{title},#{content},#{date},0,0,0,#{changeYn},#{deleteYn})
+	</insert>
+	
+	<select id="getList"
+		resultType="com.example.demo.vo.BBSVO">
+		SELECT * FROM bbs
+		WHERE deleteYn="N"
+		ORDER BY num DESC
+	</select>
+	
+</mapper>

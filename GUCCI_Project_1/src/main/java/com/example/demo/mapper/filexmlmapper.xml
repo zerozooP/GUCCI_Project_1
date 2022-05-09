@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.example.demo.mapper.FileXMLMapper">
+
+	<sql id="attachColumns">
+		  idx
+		, bno
+		, originalName
+		, saveName
+		, size
+		, deleteYn
+		, insertTime
+		, deleteTime
+	</sql>
+	
+	<update id="undeleteAttach" parameterType="list">
+		UPDATE bbs_file
+		SET
+			deleteYn = 'N'
+		WHERE
+			idx IN
+		<foreach collection="list" item="item" separator="," open="(" close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<select id="readLastBno" 
+		resultType="int">
+		SELECT
+			*
+		FROM
+			bbs
+		ORDER BY
+			num
+		DESC LIMIT 1
+	</select>
+
+	<insert id="insertAttach" parameterType="list">
+		INSERT INTO bbs_file (
+			<include refid="attachColumns" />
+		) VALUES
+		<foreach collection="list" item="item" separator=",">
+		(
+			  #{item.idx}
+			, #{item.bno}
+			, #{item.originalName}
+			, #{item.saveName}
+			, #{item.size}
+			, 'N'
+			, NOW()
+			, NULL
+		)
+		</foreach>
+	</insert>
+
+	<select id="selectAttachDetail" parameterType="long" resultType="FileVO">
+		SELECT
+			<include refid="attachColumns" />
+		FROM
+			bbs_file
+		WHERE
+			deleteYn = 'N'
+		AND
+			idx = #{idx}
+	</select>
+
+	<update id="deleteAttach" parameterType="Integer">
+		UPDATE bbs_file
+		SET
+			  deleteYn = 'Y'
+			, deleteTime = NOW()
+		WHERE
+			bno = #{bno}
+	</update>
+
+	<select id="selectAttachList" parameterType="Integer" resultType="com.example.demo.vo.FileVO">
+		SELECT
+			*
+		FROM
+			bbs_file
+		WHERE
+			deleteYn = 'N'
+		AND
+			bno = #{bno}
+	</select>
+
+	<select id="selectAttachTotalCount" parameterType="Integer" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			bbs_file
+		WHERE
+			deleteYn = 'N'
+		AND
+			bno = #{bno}
+	</select>
+	
+</mapper>

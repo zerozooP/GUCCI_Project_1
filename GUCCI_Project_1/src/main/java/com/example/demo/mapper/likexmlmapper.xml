@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.example.demo.mapper.LikeXMLMapper">
+	
+	<delete id="deleteLikeUid"
+		parameterType="com.example.demo.vo.LikeVO">
+		DELETE FROM bbs_like
+		WHERE bno=#{bno} AND like_uid=#{like_uid}
+	</delete>
+	
+	<insert id="insertLikeUid"
+		parameterType="com.example.demo.vo.LikeVO">
+		INSERT INTO bbs_like VALUES(NULL,#{bno},#{like_uid})
+	</insert>
+	
+	<update id="updateAddLike"
+		parameterType="com.example.demo.vo.LikeVO">
+		UPDATE bbs 
+		SET liked = liked + 1
+		WHERE num=#{bno}
+	</update>
+	
+	<update id="updateDelLike"
+		parameterType="com.example.demo.vo.LikeVO">
+		UPDATE bbs 
+		SET liked = liked - 1
+		WHERE num=#{bno}
+	</update>
+	
+	<select id="findLikeUid"
+		parameterType="com.example.demo.vo.LikeVO"
+		resultType="String">
+		SELECT like_uid FROM bbs_like WHERE bno=#{bno} AND like_uid=#{like_uid}
+	</select>
+	
+</mapper>
