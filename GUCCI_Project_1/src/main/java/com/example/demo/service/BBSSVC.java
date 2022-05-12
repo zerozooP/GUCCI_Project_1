@@ -38,7 +38,11 @@ public class BBSSVC {
 	public List<ReplyVO> reply(int num) {
 		return dao.reply(num);
 	}
-
+	
+	public int incrementCnt(int num) {
+		return dao.incrementCnt(num);
+		
+	}
 	public BBSVO detail(int num) {
 		return dao.detail(num);
 	}

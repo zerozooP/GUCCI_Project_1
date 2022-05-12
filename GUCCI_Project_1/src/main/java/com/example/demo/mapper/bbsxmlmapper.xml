@@ -13,7 +13,7 @@
 	<update id="edit"
 		parameterType="com.example.demo.vo.BBSVO">
 		UPDATE bbs 
-		SET title=#{title}, content=#{content}
+		SET title=#{title}, content=#{content}, category=#{category}
 		WHERE num=#{num}
 	</update>
 	
@@ -43,7 +43,7 @@
 	<insert id="insertAdd"
 		parameterType="com.example.demo.vo.BBSVO"
 		useGeneratedKeys="true" keyProperty="num">
-		INSERT INTO bbs VALUES(NULL,#{uid},#{email},#{title},#{content},#{date},0,0,0,#{changeYn},#{deleteYn})
+		INSERT INTO bbs VALUES(NULL,#{uid},#{email},#{title},#{content},#{date},0,0,0,#{changeYn},#{deleteYn},#{category})
 	</insert>
 	
 	<select id="getList"

@@ -19,12 +19,13 @@ public class BBSVO {
 	private String changeYn;
 	private String deleteYn;
 	private List<Long> fileIdxs;
+	private String category;
 	
 	
 	public BBSVO() {}
 
 	public BBSVO(int num, String uid, String email, String title, String content, 
-			String date, String category, int reply, int liked) {
+			String date, int reply, int liked, String category) {
 		super();
 		Num = num;
 		this.uid = uid;
@@ -34,9 +35,18 @@ public class BBSVO {
 		this.date = date;
 		this.reply = reply;
 		this.liked = liked;
+		this.category = category;
 	}
 	
 	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public String getDeleteYn() {
 		return deleteYn;
 	}

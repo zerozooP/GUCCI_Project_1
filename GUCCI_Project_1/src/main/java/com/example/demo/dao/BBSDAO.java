@@ -86,9 +86,12 @@ public class BBSDAO {
 	    PageInfo<BBSVO> pageInfo = new PageInfo<>(m.getList());
 	    return pageInfo;
 	}
+	
+	public int incrementCnt(int num) {
+		return m.updateCnt(num);
+	}
 
 	public BBSVO detail(int num) {
-		m.updateCnt(num);
 		return m.detail(num);
 	}
 

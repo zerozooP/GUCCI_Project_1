@@ -24,7 +24,7 @@
 					dataType : 'json',
 					success : function(res) {
 						alert(res.ok ? '로그인 성공' : '로그인 실패');
-						location.href = '/index';
+						location.href = '/bbs_list/1/all';
 					},
 					error : function(xhr, status, err) {
 						alert('아이디를 확인해 주세요' + err);
@@ -47,11 +47,11 @@
                                     <div class="card-body">
                                         <form id="loginform" onsubmit="return login();">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" name="uid" id="uid" type="text" placeholder="ID" />
+                                                <input class="form-control" name="uid" id="uid" value="박영주님" type="text" placeholder="ID" />
                                                 <label for="inputEmail">ID</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" name="pwd" id="pwd" type="password" placeholder="Password" />
+                                                <input class="form-control" name="pwd" id="pwd" value="12341234" type="password" placeholder="Password" />
                                                 <label for="inputPassword">Password</label>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">

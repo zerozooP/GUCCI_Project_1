@@ -20,7 +20,7 @@
 		</style>
 		<script>
 			function edit(uid){
-				location.href="/bbs_edit/${detail.num}";
+				location.href="/bbs_edit/${detail.num}/${category}";
 			}
 		
 			function del(num, uid){
@@ -34,7 +34,7 @@
 					dataType:"json",
 					success:function(res){
 						alert(res.deleted ? "삭제 성공":"삭제 실패");
-						location.href="/bbs_list/1";
+						location.href="/bbs_list/1/${category}";
 					},
 					error:function(xhr, status, err){
 						alert(err);
@@ -57,7 +57,7 @@
 					data		: serForm,
 					success:function(res){
 						alert(res.added ? "작성 완료":"작성 실패");
-						location.href="/bbs_detail/${detail.num}";
+						location.href="/bbs_detail/${detail.num}/${category}";
 					},
 					error:function(xhr, status, err){
 						alert(err);
@@ -100,7 +100,7 @@
 					data		: serForm,
 					success:function(res){
 						alert(res.added ? "작성 완료":"작성 실패");
-						location.href="/bbs_detail/${detail.num}";
+						location.href="/bbs_detail/${detail.num}/${category}";
 					},
 					error:function(xhr, status, err){
 						alert(err);
@@ -124,7 +124,7 @@
 					data:obj,
 					success:function(res){
 						alert(res.deleted ? "삭제 완료":"삭제 실패");
-						location.href="/bbs_detail/"+bno;
+						location.href="/bbs_detail/"+bno+"/${category}";
 					},
 					error:function(xhr, status, err){
 						alert(err);
@@ -149,7 +149,7 @@
 					dataType 	: "json",
 					data		: obj,
 					success:function(res){
-						location.href="/bbs_detail/${detail.num}";
+						location.href="/bbs_detail/${detail.num}/${category}";
 					},
 					error:function(xhr, status, err){
 						alert(err);
@@ -214,7 +214,7 @@
 					        </c:if>
 					    </div>
 					    <div class="btn1">
-						    <a href="/bbs_list/1" class="btn btn-outline-primary btn-sm">목록</a>
+						    <a href="/bbs_list/1/${category}" class="btn btn-outline-primary btn-sm">목록</a>
 						    <!-- 작성자와 로그인유저가 동일 유저라면 수정, 삭제 활성화  -->
 						    <c:set value="${uid}" var="uid"/>
 						    <c:set value="${detail.uid}" var="duid"/>

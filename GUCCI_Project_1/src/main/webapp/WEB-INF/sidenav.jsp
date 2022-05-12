@@ -1,3 +1,4 @@
+ <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -39,7 +40,6 @@
 											<c:if test="${phone!=null}">
 												<a class="nav-link" href="/update">Password</a>
 											</c:if>
-                                            <a class="nav-link" href="/bbs_list/1">Board</a>
                                         </nav>
                                     </div>
                                     </form>
@@ -54,6 +54,18 @@
                                             <a class="nav-link" href="/500">500 Page</a>
                                         </nav>
                                     </div>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#boardCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                Board
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                             <div class="collapse" id="boardCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="/bbs_list/1/all">전체게시판</a>
+                                    <a class="nav-link" href="/bbs_list/1/FreeBoard">자유게시판</a>
+                                    <a class="nav-link" href="/bbs_list/1/meetingLog">회의록</a>
+                                    <a class="nav-link" href="/bbs_list/1/something">something</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Addons</div>
