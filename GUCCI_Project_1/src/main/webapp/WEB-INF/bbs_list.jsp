@@ -14,10 +14,16 @@
 		<title>프로젝트 게시판</title>
 		<script>
 			window.onload = function(){
-				$("#ctgr")[0].innerHTML = "${category}"
+				if("${category}"=="all"){
+					$("#ctgr")[0].innerHTML = "전체게시판"
+				} else if("${category}"=="meetingLog"){
+					$("#ctgr")[0].innerHTML = "회의록"
+				} else if("${category}"=="FreeBoard"){
+					$("#ctgr")[0].innerHTML = "자유게시판"
+				} else{
+					$("#ctgr")[0].innerHTML = "something"
+				}
 			}
-		
-			
 
 			function bbs_add(uid){
 				if (uid == "") {
