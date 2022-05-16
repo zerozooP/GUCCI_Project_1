@@ -6,10 +6,10 @@
 	<head>
 		<jsp:include page="/WEB-INF/header.jsp"></jsp:include>
 		<style>
-			a { text-decoration:none }
-			a:link { color : black; }
-			a:visited { color : #bc3cbc; }
-			a:hover { color : red; }
+			.list a { text-decoration:none }
+			.list a:link { color : black; }
+			.list a:visited { color : #bc3cbc; }
+			.list a:hover { color : red; }
 		</style>
 		<title>프로젝트 게시판</title>
 		<script>
@@ -33,6 +33,7 @@
 				location.href="/bbs_add";
 				}
 			}
+			
 		</script>
 	</head>
 	<body>
@@ -60,7 +61,7 @@
 									<th class="col-1">좋아요</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="list">
 								<c:set value="${category}" var="category"/>
 								<c:forEach items="${pageInfo.list}" var="list">
 									<c:if test="${list.category==category}">
@@ -86,20 +87,20 @@
 								</c:forEach>
 							</tbody>
 						</table>
-							
-						<div id="pagination">
-						   	<c:forEach var="i" items="${pageInfo.navigatepageNums}">
-						      	<c:choose>
-						         	<c:when test="${i==pageInfo.pageNum}">	<!-- (c:when = if) 현재 보는 페이지는 링크를 안걸고 -->
-						         	   [${i}] 
-						         	</c:when>
-						         	<c:otherwise>							<!-- (c:otherwise = else) 다른 페이지는 링크 걸음 -->
-						          	  [<a href="/bbs_list/${i}/${category}">${i}</a>] 
-						         	</c:otherwise>
-						      	</c:choose> 
-						   	</c:forEach>
-						</div>
-						
+						<nav aria-label="Page navigation example">
+							<ul class="pagination justify-content-center">
+							   	<c:forEach var="i" items="${pageInfo.navigatepageNums}">
+							      	<c:choose>
+							         	<c:when test="${i==pageInfo.pageNum}">	<!-- (c:when = if) 현재 보는 페이지는 링크를 안걸고 -->
+											<li class="page-item disabled"><a class="page-link" href="#">${i}</a></li>
+							         	</c:when>
+							         	<c:otherwise>							<!-- (c:otherwise = else) 다른 페이지는 링크 걸음 -->
+							          	  	<li class="page-item"><a class="page-link" href="/bbs_list/${i}/${category}">${i}</a></li>
+							         	</c:otherwise>
+							      	</c:choose> 
+							   	</c:forEach>
+						   	</ul>
+						</nav>
 						<br>
 						<button type="button" class="btn btn-outline-primary" onclick="bbs_add('${uid}');">글쓰기</button>
 					</div>

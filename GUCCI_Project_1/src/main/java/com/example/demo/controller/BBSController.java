@@ -204,8 +204,14 @@ public class BBSController {
 	@GetMapping("/bbs_list/{pgNum}/{ctgr}")
 	public String GetList(@PathVariable("pgNum")int pg, Model m, @PathVariable("ctgr")String ctgr) {
 		PageInfo<BBSVO> pgInfo = svc.getList(pg, 8, ctgr);
+		int startPage = pg - 4;
+		int lastPage  = pgInfo.getNavigateLastPage();
+		System.out.println(lastPage);
 		m.addAttribute("category", ctgr);
 		m.addAttribute("pageInfo", pgInfo);
+		m.addAttribute("startPage", startPage);
+		m.addAttribute("lastPage", lastPage);
+		
 	    return "bbs_list";
 	}
 }
