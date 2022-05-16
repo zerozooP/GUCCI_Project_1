@@ -11,7 +11,8 @@ import com.example.demo.vo.ReplyVO;
 public interface BBSXMLMapper {
 
 	int insertAdd(BBSVO vo);
-	List<BBSVO> getList();
+	List<BBSVO> getAllList();
+	List<BBSVO> getList(String ctgr);
 	BBSVO detail(int num);
 	int edit(BBSVO vo);
 	int delete(int num);

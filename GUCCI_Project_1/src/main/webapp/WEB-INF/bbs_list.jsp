@@ -15,13 +15,13 @@
 		<script>
 			window.onload = function(){
 				if("${category}"=="all"){
-					$("#ctgr")[0].innerHTML = "전체게시판"
+					$("#ctgr")[0].innerHTML = "[전체게시판]"
 				} else if("${category}"=="meetingLog"){
-					$("#ctgr")[0].innerHTML = "회의록"
+					$("#ctgr")[0].innerHTML = "[회의록]"
 				} else if("${category}"=="FreeBoard"){
-					$("#ctgr")[0].innerHTML = "자유게시판"
+					$("#ctgr")[0].innerHTML = "[자유게시판]"
 				} else{
-					$("#ctgr")[0].innerHTML = "something"
+					$("#ctgr")[0].innerHTML = "[something]"
 				}
 			}
 
@@ -88,16 +88,16 @@
 						</table>
 							
 						<div id="pagination">
-						   <c:forEach var="i" items="${pageInfo.navigatepageNums}">
-						      <c:choose>
-						         <c:when test="${i==pageInfo.pageNum}">	<!-- (c:when = if) 현재 보는 페이지는 링크를 안걸고 -->
-						            [${i}] 
-						         </c:when>
-						         <c:otherwise>							<!-- (c:otherwise = else) 다른 페이지는 링크 걸음 -->
-						            [<a href="/bbs_list/${i}">${i}</a>] 
-						         </c:otherwise>
-						      </c:choose> 
-						   </c:forEach>
+						   	<c:forEach var="i" items="${pageInfo.navigatepageNums}">
+						      	<c:choose>
+						         	<c:when test="${i==pageInfo.pageNum}">	<!-- (c:when = if) 현재 보는 페이지는 링크를 안걸고 -->
+						         	   [${i}] 
+						         	</c:when>
+						         	<c:otherwise>							<!-- (c:otherwise = else) 다른 페이지는 링크 걸음 -->
+						          	  [<a href="/bbs_list/${i}/${category}">${i}</a>] 
+						         	</c:otherwise>
+						      	</c:choose> 
+						   	</c:forEach>
 						</div>
 						
 						<br>

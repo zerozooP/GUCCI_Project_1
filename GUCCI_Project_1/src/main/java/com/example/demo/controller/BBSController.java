@@ -203,9 +203,9 @@ public class BBSController {
 	
 	@GetMapping("/bbs_list/{pgNum}/{ctgr}")
 	public String GetList(@PathVariable("pgNum")int pg, Model m, @PathVariable("ctgr")String ctgr) {
-		PageInfo<BBSVO> pgInfo = svc.getList(pg, 8);
+		PageInfo<BBSVO> pgInfo = svc.getList(pg, 8, ctgr);
 		m.addAttribute("category", ctgr);
-	    m.addAttribute("pageInfo", pgInfo);
+		m.addAttribute("pageInfo", pgInfo);
 	    return "bbs_list";
 	}
 }

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.example.demo")
 public class GucciProject1Application implements WebMvcConfigurer{
 
 	public static void main(String[] args) {

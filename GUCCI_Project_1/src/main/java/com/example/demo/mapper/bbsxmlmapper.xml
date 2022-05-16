@@ -46,10 +46,17 @@
 		INSERT INTO bbs VALUES(NULL,#{uid},#{email},#{title},#{content},#{date},0,0,0,#{changeYn},#{deleteYn},#{category})
 	</insert>
 	
-	<select id="getList"
+	<select id="getAllList"
 		resultType="com.example.demo.vo.BBSVO">
 		SELECT * FROM bbs
 		WHERE deleteYn="N"
+		ORDER BY num DESC
+	</select>
+	
+	<select id="getList"
+		resultType="com.example.demo.vo.BBSVO">
+		SELECT * FROM bbs
+		WHERE deleteYn="N" AND category=#{ctgr}
 		ORDER BY num DESC
 	</select>
 	

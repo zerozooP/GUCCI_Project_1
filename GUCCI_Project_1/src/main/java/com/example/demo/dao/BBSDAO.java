@@ -81,9 +81,15 @@ public class BBSDAO {
 		return m.selectReply(num);
 	}
 
-	public PageInfo<BBSVO> getList(int pageNum, int pageSize) {
+	public PageInfo<BBSVO> getList(int pageNum, int pageSize, String ctgr) {
 		PageHelper.startPage(pageNum, pageSize);
-	    PageInfo<BBSVO> pageInfo = new PageInfo<>(m.getList());
+		
+		PageInfo<BBSVO> pageInfo = new PageInfo<>();
+		if(ctgr.equals("all")) {
+		    pageInfo = new PageInfo<>(m.getAllList());
+		} else {
+			pageInfo = new PageInfo<>(m.getList(ctgr));
+		}
 	    return pageInfo;
 	}
 	

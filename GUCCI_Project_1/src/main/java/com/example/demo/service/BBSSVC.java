@@ -31,8 +31,8 @@ public class BBSSVC {
 		return dao.add(vo)>0;
 	}
 
-	public PageInfo<BBSVO> getList(int pageNum, int pageSize) {
-		return dao.getList(pageNum, pageSize);
+	public PageInfo<BBSVO> getList(int pageNum, int pageSize, String ctgr) {
+		return dao.getList(pageNum, pageSize, ctgr);
 	}
 	
 	public List<ReplyVO> reply(int num) {
